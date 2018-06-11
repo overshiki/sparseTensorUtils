@@ -1,10 +1,10 @@
-## sparse tensor utils based on pytorch tensor and sparseTensor. Currently does not guarateed to support graph backward, so that should be only used for gpu boosted inference.
+## sparse tensor utils based on pytorch tensor and sparse.Tensor. Currently does not guaranteed to support graph backward, so that should only be used for gpu boosted inference.
 
 Here we provide a basic sparse tensor wrapper: 
 ```python
 In [1]: from sparseTensorUtils.sparse.tensor import sparseTensor
 ```
-it can be constructed with 1d tensor indices_x, 1s tensor indices_y and 1d tensor values and shape tuple:
+it can be constructed with 1d tensor indices_x, 1d tensor indices_y, 1d tensor values and shape tuple:
 ```python
 In [2]: import torch
 In [3]: data = torch.randn(100,100).cuda(0)

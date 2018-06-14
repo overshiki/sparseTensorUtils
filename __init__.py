@@ -1,1 +1,1 @@
-import scatter_utils
+from kernels.c_kernel import scatter_utils

@@ -5,7 +5,7 @@ from pynvrtc.compiler import Program
 from cupy.cuda import function
 from collections import namedtuple
 
-from .. import scatter_map, scatter_sum, scatter_map_c, scatter_sum_c
+from .. import scatter_map_c, scatter_sum_c
 import math
 
 kernel = '''

@@ -9,7 +9,7 @@ extra_objects += glob.glob('/usr/local/cuda/lib64/*.a')
 
 ffi = create_extension(
     'scatter_utils',
-    headers=['./include/scatter_utils.h'],
+    headers=['include/scatter_utils.h'],
     sources=['scatter_utils.c'],
     verbose=True,
     define_macros=[('WITH_CUDA', None)],
@@ -23,5 +23,6 @@ ffi = create_extension(
 if __name__ == '__main__':
     assert torch.cuda.is_available(), 'Please install CUDA for GPU support.'
     ffi.build()
+
 
 

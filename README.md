@@ -2,8 +2,6 @@
 
 ### dependencies:
         torch
-        cupy
-        pynvrtc
 
 Here we provide a basic sparse tensor wrapper: 
 ```python
@@ -57,17 +55,9 @@ tensor([[ 0.0000,  0.3688,  0.0000,  0.0000,  0.0000],
         [ 0.0000,  1.8625,  1.6553,  0.0000,  0.1964]], device='cuda:0')
 ```
 
-<<<<<<< HEAD
-and all kinds of element-wise math operation, to list a fiew:
-=======
-In [19]: sp_test.sum(dim=0)
-Out[19]: tensor([ 1.0469,  3.2423,  2.3594,  0.3194,  1.5410], device='cuda:0')
 
-In [20]: sp_test.sum(dim=1)
-Out[20]: tensor([ 0.3688,  1.0673,  2.0283,  1.3304,  3.7141], device='cuda:0')
-```
+
 and all kinds of element-wise math operation, to list a few:
->>>>>>> 95f254bd960e9d5cb30d0b116a4f173e6af21fdb
 ```python 
 In [13]: (sp_test+10).to_dense()
 Out[13]: 

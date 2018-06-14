@@ -1,13 +1,23 @@
 ## sparse tensor utils based on pytorch tensor and sparse.Tensor. Currently does not guaranteed to support graph backward, so that should only be used for gpu boosted inference.
 
-### dependencies:
-        torch
+### description:
 
-Here we provide a basic sparse tensor wrapper: 
+Here provides a basic sparse tensor wrapper: 
 ```python
 In [1]: from sparseTensorUtils.sparse.tensor import sparseTensor
 ```
-The basic functions for the wrapper is written with pytorch built-in function and some extra cupy-cuda kernel, so that fully support gpus.
+The basic functions for the wrapper is written with pytorch built-in function and some c cuda kernel, linked with pytorch cffi, so that fully support gpus.
+
+### how to install:
+
+To build the c kernel:
+```bash
+cd kernels/c_kernel
+make
+```
+
+### dependencies:
+        torch
 
 The object can be constructed with 1d tensor indices_x, 1d tensor indices_y, 1d tensor values and shape tuple:
 ```python
@@ -18,7 +28,7 @@ In [5]: value = torch.masked_select(data, data>0)
 In [6]: x, y, v, shape = indices[:, 0], indices[:, 1], value, list(data.shape)
 In [7]: sp = sparseTensor(x, y, v, shape)
 ```
-Most importantly, our sparseTensor wrapper supports slice and reduce_sum:
+Most importantly, the sparseTensor wrapper supports slice and reduce_sum:
 ```python
 sp_test = sp[5:50:10, 5:50:10]
 
@@ -31,9 +41,8 @@ Out[19]: tensor([ 1.0469,  3.2423,  2.3594,  0.3194,  1.5410], device='cuda:0')
 In [20]: sp_test.sum(dim=1)
 Out[20]: tensor([ 0.3688,  1.0673,  2.0283,  1.3304,  3.7141], device='cuda:0')
 ```
-this yeild another sparseTensor with shape [5,5]
 
-to transform it into pytorch sparseTensor, do:
+to transform the wrapper object into pytorch sparseTensor, do:
 ```python
 In [10]: sp_test.torch()
 Out[10]: 

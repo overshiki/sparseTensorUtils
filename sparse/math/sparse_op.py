@@ -5,7 +5,7 @@ from pynvrtc.compiler import Program
 from cupy.cuda import function
 from collections import namedtuple
 
-from .. import scatter_map, scatter_sum
+from .. import scatter_map, scatter_sum, scatter_map_c, scatter_sum_c
 import math
 
 kernel = '''
@@ -207,10 +207,10 @@ def reduce_sum(sparse_A, dim=-1):
 		index_len = sparse_A.shape[0]
 		index = sparse_A.index_x.int()
 		values = sparse_A.value.float()
-		return scatter_sum(index, values, index_len)
+		return scatter_sum_c(index, values, index_len)
 	elif dim==0:
 		index_len = sparse_A.shape[1]
 		index = sparse_A.index_y.int()
 		values = sparse_A.value.float()
-		return scatter_sum(index, values, index_len)		
+		return scatter_sum_c(index, values, index_len)		
 

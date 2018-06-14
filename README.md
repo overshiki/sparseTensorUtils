@@ -16,6 +16,15 @@ In [7]: sp = sparseTensor(x, y, v, shape)
 Most importantly, our sparseTensor wrapper support slice and reduce_sum:
 ```python
 sp_test = sp[5:50:10, 5:50:10]
+
+In [18]: sp_test.sum()
+Out[18]: tensor(8.5090, device='cuda:0')
+
+In [19]: sp_test.sum(dim=0)
+Out[19]: tensor([ 1.0469,  3.2423,  2.3594,  0.3194,  1.5410], device='cuda:0')
+
+In [20]: sp_test.sum(dim=1)
+Out[20]: tensor([ 0.3688,  1.0673,  2.0283,  1.3304,  3.7141], device='cuda:0')
 ```
 this yeild another sparseTensor with shape [5,5]
 to transform it into pytorch sparseTensor, do:
@@ -39,17 +48,7 @@ tensor([[ 0.0000,  0.3688,  0.0000,  0.0000,  0.0000],
         [ 0.0000,  1.0110,  0.0000,  0.3194,  0.0000],
         [ 0.0000,  1.8625,  1.6553,  0.0000,  0.1964]], device='cuda:0')
 ```
-currently this wrapper also support reduce sum:
-```python
-In [18]: sp_test.sum()
-Out[18]: tensor(8.5090, device='cuda:0')
 
-In [19]: sp_test.sum(dim=0)
-Out[19]: tensor([ 1.0469,  3.2423,  2.3594,  0.3194,  1.5410], device='cuda:0')
-
-In [20]: sp_test.sum(dim=1)
-Out[20]: tensor([ 0.3688,  1.0673,  2.0283,  1.3304,  3.7141], device='cuda:0')
-```
 and all kinds of element-wise math operation, to list a fiew:
 ```python 
 In [13]: (sp_test+10).to_dense()
